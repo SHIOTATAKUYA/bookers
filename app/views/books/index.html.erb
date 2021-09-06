@@ -19,14 +19,19 @@
     <th><%= link_to "Edit", edit_book_path(book.id) %></th>
     <th><%= link_to 'Destroy', book_path(book.id), method: :delete %></th>
     </tr>
-     <% end %>
+    <% end %>
 
 </table>
 
 
 <h2>New book</h2>
+<% if @book.errors.any? %>
+ <%= @book.errors.count %>errors prohibited this book from being saved:
+ <% @book.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+ <% end %>
+<% end %>
 <%= form_with model: @book, url:'/books', local:true do |f| %>
-
 
   <div class="field">
     <label for="book_title">Title</label>
@@ -40,6 +45,8 @@
   <div class="actions"><%= f.submit 'Create Books' %></div>
 
 <% end %>
+
+
 
 
 </body>
